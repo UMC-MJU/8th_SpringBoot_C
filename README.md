@@ -38,7 +38,7 @@ Copyright © Sojung Park (Bei) All rights reserved.
 
 
 ## 🍀 Members
-| [![텍스트](없음)](없음) | [![텍스트](없음)](없음) | [![텍스트](없음)](없음) |
+| [![텍스트](https://avatars.githubusercontent.com/u/173240707?v=4)](https://github.com/dydwls2227) | [![텍스트](https://avatars.githubusercontent.com/u/164713708?v=4)](https://github.com/GahBaek) | [![텍스트](https://avatars.githubusercontent.com/u/82094699?v=4)](https://github.com/OrangeKim04) |
 |:---:|:---:|:---:|
 | 룡_박용진 | 빽_백가현 | 제이_김규리 |
 
