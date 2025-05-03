@@ -1,4 +1,4 @@
-package com.example.demo.service.StoreService;
+package com.example.mission5.service.StoreService;
 
 import com.example.demo.domain.Store;
 import com.example.demo.repository.StoreRepository.StoreRepository;

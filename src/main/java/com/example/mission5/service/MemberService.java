@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.mission5.service;
 
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberMissionRepository;
