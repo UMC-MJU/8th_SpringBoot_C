@@ -1,4 +1,4 @@
-package com.example.demo.repository.StoreRepository;
+package com.example.mission5.repository.StoreRepository;
 
 import com.example.demo.domain.Store;
 import org.springframework.data.jpa.repository.JpaRepository;

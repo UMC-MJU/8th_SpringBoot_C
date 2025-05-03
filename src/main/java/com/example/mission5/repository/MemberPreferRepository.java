@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.mission5.repository;
 
 import com.example.demo.domain.MemberPrefer;
 import org.springframework.data.jpa.repository.JpaRepository;
