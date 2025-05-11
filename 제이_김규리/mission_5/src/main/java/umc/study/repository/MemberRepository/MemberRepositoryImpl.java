@@ -16,9 +16,9 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     @Override
     public Member findMemberById(Long memberId) {
         return jpaQueryFactory
-                .select(member.id, member.name, member.email, member.phoneNum, member.point)
-                .from(member)
+                .selectFrom(member)
                 .where(member.id.eq(memberId))
                 .fetchOne();
+
     }
 }

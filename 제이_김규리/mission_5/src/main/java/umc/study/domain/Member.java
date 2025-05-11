@@ -50,6 +50,8 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String email;
 
+    @Column(nullable = false, length = 15)  // phoneNum 필드 추가
+    private String phoneNum;
 
     private Integer point;
 
