@@ -1,4 +1,4 @@
-package umc.study.web;
+package umc.study.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
