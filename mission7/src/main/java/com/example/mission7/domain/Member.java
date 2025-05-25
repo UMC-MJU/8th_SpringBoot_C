@@ -32,8 +32,9 @@ public class Member extends BaseEntity {
     private List<MemberMission> memberMissions = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
-    private List<MemberPrefer> memberPrefers = new ArrayList<>();
+    private List<MemberPrefer> memberPreferList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
+
 }

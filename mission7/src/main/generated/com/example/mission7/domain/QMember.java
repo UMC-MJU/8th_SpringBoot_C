@@ -40,7 +40,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final ListPath<MemberMission, QMemberMission> memberMissions = this.<MemberMission, QMemberMission>createList("memberMissions", MemberMission.class, QMemberMission.class, PathInits.DIRECT2);
 
-    public final ListPath<MemberPrefer, QMemberPrefer> memberPrefers = this.<MemberPrefer, QMemberPrefer>createList("memberPrefers", MemberPrefer.class, QMemberPrefer.class, PathInits.DIRECT2);
+    public final ListPath<MemberPrefer, QMemberPrefer> memberPreferList = this.<MemberPrefer, QMemberPrefer>createList("memberPreferList", MemberPrefer.class, QMemberPrefer.class, PathInits.DIRECT2);
 
     public final StringPath name = createString("name");
 
