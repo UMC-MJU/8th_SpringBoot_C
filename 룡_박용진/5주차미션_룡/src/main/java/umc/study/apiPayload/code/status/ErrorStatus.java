@@ -3,6 +3,7 @@ package umc.study.apiPayload.code.status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import umc.study.apiPayload.code.BaseCode;
 import umc.study.apiPayload.code.BaseErrorCode;
 import umc.study.apiPayload.code.ErrorReasonDTO;
 
@@ -25,7 +26,11 @@ public enum ErrorStatus implements BaseErrorCode {
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),
 
     // For test
-    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트");
+    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "FOOD_CATEGORY4001", "음식 카테고리가 없습니다."),
+
+    // 미션 관련 에러
+    MISSION_ALREADY_CHALLENGED(HttpStatus.BAD_REQUEST, "MYMISSION400", "이미 도전 중인 미션입니다.");
 
 
     private final HttpStatus httpStatus;

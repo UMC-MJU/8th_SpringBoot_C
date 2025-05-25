@@ -19,6 +19,8 @@ public class Review extends BaseEntity {
 
     private Float score;
 
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "member_id")  // 외래키 컬럼명
     private Member member;
@@ -27,7 +29,5 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "store_id")  // 외래키 컬럼명
     private Store store;
 
-//    @OneToMany
-//    private List<Review> reviews;
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import umc.study.apiPayload.code.BaseCode;
+import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.code.status.SuccessStatus;
 
 @Getter
@@ -35,5 +36,11 @@ public class ApiResponse<T> {
     // 실패한 경우 응답 생성
     public static <T> ApiResponse<T> onFailure(String code, String message, T data){
         return new ApiResponse<>(false, code, message, data);
+    }
+
+    public static <T> ApiResponse<T> fail(ErrorStatus errorCode) {
+        return new ApiResponse<>(false, errorCode.getReasonHttpStatus().getCode(),
+                errorCode.getReasonHttpStatus().getMessage(),
+                null);
     }
 }
