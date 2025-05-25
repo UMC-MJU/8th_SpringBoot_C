@@ -62,8 +62,18 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             ErrorReasonDTO errorReasonHttpStatus = generalException.getErrorReasonHttpStatus();
             return handleExceptionInternal(generalException,errorReasonHttpStatus,null,request);
         }
+        @ExceptionHandler(IllegalArgumentException.class)
+        public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.fail(ErrorStatus.MISSION_ALREADY_CHALLENGED));
+        }
 
-        private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
+
+
+
+
+    private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
                                                                HttpHeaders headers, HttpServletRequest request) {
 
             ApiResponse<Object> body = ApiResponse.onFailure(reason.getCode(),reason.getMessage(),null);
