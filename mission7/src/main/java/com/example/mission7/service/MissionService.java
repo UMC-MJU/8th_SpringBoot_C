@@ -8,6 +8,7 @@ import com.example.mission7.repository.StoreRepository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -29,5 +30,9 @@ public class MissionService {
                 .build();
 
         return missionRepository.save(mission).getId();
+    }
+
+    public List<Mission> getMissionsByStore(UUID storeId) {
+        return missionRepository.findAllByStoreId(storeId);
     }
 }

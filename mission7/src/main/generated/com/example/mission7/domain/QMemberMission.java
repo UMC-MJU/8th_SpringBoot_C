@@ -34,7 +34,7 @@ public class QMemberMission extends EntityPathBase<MemberMission> {
 
     public final QMission mission;
 
-    public final StringPath status = createString("status");
+    public final EnumPath<MissionStatus> status = createEnum("status", MissionStatus.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updated_at = _super.updated_at;
