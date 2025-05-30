@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -46,5 +47,21 @@ public class ReviewController {
     public ApiResponse<StoreResponseDTO.ReviewPreViewListDTO> getReviewList( @PathVariable(name = "storeId") UUID storeId,@RequestParam(name = "page") Integer page){
         Page<Review> reviewList = reviewService.getReviewList(storeId,page);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviewList));
+    }
+
+    @GetMapping("/{memberId}")
+    @Operation(
+            summary = "내가 작성한 리뷰 목록 조회 API",
+            description = "특정 회원이 작성한 리뷰 목록을 반환합니다."
+    )
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "리뷰 목록 조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "해당 회원을 찾을 수 없음", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+    })
+    @Parameters({
+            @Parameter(name = "memberId", description = "회원 ID (UUID)", required = true)
+    })    public ResponseEntity<List<Review>> getMyReviews(@PathVariable UUID memberId) {
+        List<Review> reviews = reviewService.getMyReviews(memberId);
+        return ResponseEntity.ok(reviews);
     }
 }
