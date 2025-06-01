@@ -1,34 +1,48 @@
 package umc.study.service.StoreService;
 
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import umc.study.converter.StoreConverter;
-import umc.study.domain.Region;
+import umc.study.domain.Review;
 import umc.study.domain.Store;
-import umc.study.repository.RegionRepository;
+import umc.study.repository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
-import umc.study.web.dto.StoreRequestDTO;
-import umc.study.web.dto.StoreResponseDTO;
 
-import java.util.NoSuchElementException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-public class StoreServiceImpl implements StoreService {
+public class StoreServiceImpl implements StoreService{
 
     private final StoreRepository storeRepository;
-    private final RegionRepository regionRepository;
+
+    private final ReviewRepository reviewRepository;
 
     @Override
-    public StoreResponseDTO addStore(StoreRequestDTO request) {
-        Region region = regionRepository.findById(request.getRegionId())
-                .orElseThrow(() -> new NoSuchElementException("Region not found"));
-
-        Store store = StoreConverter.toEntity(request.getName(), region);
-        Store saved = storeRepository.save(store);
-
-        return StoreConverter.toDTO(saved);
+    public Optional<Store> findStore(Long id) {
+        return storeRepository.findById(id);
     }
+
+    @Override
+    public List<Store> findStoresByNameAndScore(String name, Float score) {
+        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
+
+        filteredStores.forEach(store -> System.out.println("Store: " + store));
+
+        return filteredStores;
+    }
+
+    @Override
+    public Page<Review> getReviewList(Long StoreId, Integer page) {
+
+        Store store = storeRepository.findById(StoreId).get();
+
+        Page<Review> StorePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return StorePage;
+    }
+
 }
