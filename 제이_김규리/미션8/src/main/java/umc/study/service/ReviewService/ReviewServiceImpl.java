@@ -1,6 +1,8 @@
 package umc.study.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.domain.Member;
@@ -48,5 +50,21 @@ public class ReviewServiceImpl implements ReviewService {
                 .build();
 
 
+    }
+    @Override
+    public Page<ReviewResponseDTO> getMyReviews(Long memberId, int page) {
+        memberRepository.findById(memberId)
+                .orElseThrow(() -> new NoSuchElementException("Member not found"));
+
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+        Page<Review> reviews = reviewRepository.findAllByMemberId(memberId, pageRequest);
+
+        return reviews.map(review -> ReviewResponseDTO.builder()
+                .id(review.getId())
+                .title(review.getTitle())
+                .score(review.getScore())
+                .memberId(review.getMember().getId())
+                .storeId(review.getStore().getId())
+                .build());
     }
 }
