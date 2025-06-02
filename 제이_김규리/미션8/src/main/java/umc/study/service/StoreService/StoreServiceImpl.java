@@ -6,11 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.study.domain.Mission;
 import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.repository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
-
+import umc.study.repository.MissionRepository.MissionRepository;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class StoreServiceImpl implements StoreService{
     private final StoreRepository storeRepository;
 
     private final ReviewRepository reviewRepository;
-
+    private final MissionRepository missionRepository;
     @Override
     public Optional<Store> findStore(Long id) {
         return storeRepository.findById(id);
@@ -43,6 +44,11 @@ public class StoreServiceImpl implements StoreService{
 
         Page<Review> StorePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
         return StorePage;
+    }
+    @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 가게입니다."));
+        return missionRepository.findAllByStore(store, PageRequest.of(page, 10));
     }
 
 }

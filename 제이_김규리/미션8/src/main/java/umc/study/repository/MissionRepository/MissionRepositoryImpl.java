@@ -3,12 +3,12 @@ package umc.study.repository.MissionRepository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import umc.study.domain.Mission;
-import umc.study.domain.QMember;
+import umc.study.domain.*;
 import umc.study.domain.mapping.QMemberMission;
-import umc.study.domain.QMission;
-import umc.study.domain.QStore;
 import umc.study.domain.enums.MissionStatus;
 
 import java.util.List;
@@ -56,5 +56,21 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom {
                 .orderBy(mission.id.desc())
                 .limit(10)
                 .fetch();
+    }
+    @Override
+    public Page<Mission> findAllByStore(Store storeEntity, Pageable pageable) {
+        List<Mission> content = jpaQueryFactory
+                .selectFrom(mission)
+                .where(mission.store.eq(storeEntity))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        long total = jpaQueryFactory
+                .selectFrom(mission)
+                .where(mission.store.eq(storeEntity))
+                .fetchCount();
+
+        return new PageImpl<>(content, pageable, total);
     }
 }

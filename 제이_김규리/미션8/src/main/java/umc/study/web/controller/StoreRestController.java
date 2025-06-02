@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.study.apiPayload.ApiResponse;
 import umc.study.converter.StoreConverter;
+import umc.study.domain.Mission;
 import umc.study.domain.Review;
 import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.service.StoreService.StoreService;
@@ -41,4 +42,11 @@ public class StoreRestController {
         Page<Review> reviewList = storeQueryService.getReviewList(storeId, page);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviewList));
     }
+    @GetMapping("/{storeId}/missions")
+    public ApiResponse<StoreResponseDTO.MissionPreviewListDTO> getStoreMissionList(@ExistStore @PathVariable("storeId") Long storeId,
+                                                                                   @RequestParam("page") Integer page) {
+        Page<Mission> missions = storeQueryService.getMissionList(storeId, page);
+        return ApiResponse.onSuccess(StoreConverter.missionPreviewListDTO(missions));
+    }
+
 }
