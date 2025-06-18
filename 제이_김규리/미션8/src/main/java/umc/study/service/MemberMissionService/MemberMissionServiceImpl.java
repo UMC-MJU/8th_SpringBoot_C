@@ -13,7 +13,9 @@ import umc.study.repository.MissionRepository.MissionRepository;
 import umc.study.web.dto.StoreMissionRequestDTO;
 import umc.study.web.dto.StoreMissionResponseDTO;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,4 +49,18 @@ public class MemberMissionServiceImpl implements MemberMissionService {
                 .status(saved.getStatus().name())
                 .build();
     }
+    @Override
+    @Transactional(readOnly = true)
+    public List<StoreMissionResponseDTO> getInProgressMissions(Long memberId, Long cursor) {
+        List<Mission> missions = missionRepository.findInProgressMissions(memberId, cursor);
+
+        return missions.stream()
+                .map(mission -> StoreMissionResponseDTO.builder()
+                        .missionId(mission.getId())
+                        .memberId(memberId)
+                        .status(MissionStatus.CHALLENGING.name())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
 }
