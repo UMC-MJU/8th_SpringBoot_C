@@ -10,8 +10,11 @@ import com.example.mission7.repository.MemberRepository;
 import com.example.mission7.repository.ReviewRepository;
 import com.example.mission7.repository.StoreRepository.StoreRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,6 +40,16 @@ public class ReviewService {
                 .build();
 
         return reviewRepository.save(review).getId();
+    }
+
+    public Page<Review> getReviewList(UUID storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).get();
+
+        Page<Review> StorePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return StorePage;    }
+
+    public List<Review> getMyReviews(UUID memberId) {
+        return reviewRepository.findAllByMemberId(memberId);
     }
 }
 

@@ -1,8 +1,6 @@
 package com.example.mission7.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity(name = "member_mission")
 public class MemberMission extends BaseEntity{
-    String status;
+    @Enumerated(EnumType.STRING)
+    private MissionStatus status;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -23,4 +22,8 @@ public class MemberMission extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    public void setStatus(MissionStatus status) {
+        this.status = status;
+    }
 }
