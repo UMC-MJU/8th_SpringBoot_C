@@ -9,6 +9,8 @@ import umc.study.domain.enums.SocialType;
 import umc.study.domain.mapping.MemberAgree;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.domain.mapping.MemberPrefer;
+import umc.study.domain.enums.Role;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,13 +49,20 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
-    private String email;
 
     @Column(nullable = false, length = 15)  // phoneNum 필드 추가
     private String phoneNum;
 
     private Integer point;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -70,4 +79,8 @@ public class Member extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 }
