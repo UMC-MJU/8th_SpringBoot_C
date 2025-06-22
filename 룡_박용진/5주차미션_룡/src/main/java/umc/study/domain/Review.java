@@ -19,7 +19,7 @@ public class Review extends BaseEntity {
 
     private Float score;
 
-    private String description;
+    private String body;
 
     @ManyToOne
     @JoinColumn(name = "member_id")  // 외래키 컬럼명
