@@ -66,7 +66,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException e) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(ApiResponse.fail(ErrorStatus.MISSION_ALREADY_CHALLENGED));
+                    .body(ApiResponse.fail  (ErrorStatus.MISSION_ALREADY_CHALLENGED));
         }
 
 

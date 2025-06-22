@@ -1,8 +1,11 @@
 package umc.study.service.StoreService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.study.domain.Region;
+import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.repository.RegionRepository;
 import umc.study.repository.StoreRepository;
@@ -27,5 +30,6 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
         storeRepository.save(store);
     }
-}
+
+    }
 

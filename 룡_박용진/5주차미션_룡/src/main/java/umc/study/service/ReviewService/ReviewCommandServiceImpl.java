@@ -33,7 +33,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
                 .store(store)
                 .score(request.getScore())
                 .title(request.getTitle())
-                .description(request.getDescription())
+                .body(request.getBody())
                 .build();
 
         reviewRepository.save(review);
