@@ -17,5 +17,5 @@ public class ReviewRequestDTO {
     private String title;
 
     @NotBlank
-    private String description;
+    private String body;
 }
